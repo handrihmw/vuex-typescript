@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <h1 class="text-5xl leading-none font-extrabold text-gray-900 tracking-tight mb-4">Get User</h1>
+  <div class="w-full p-8">
+    <h1 class="mb-4 text-3xl sm:text-4xl text-slate-700 font-extrabold tracking-tight">Made by Getters</h1>
     <getUser />
   </div>
 </template>

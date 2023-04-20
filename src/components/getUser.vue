@@ -6,33 +6,46 @@ import { userStoreEnum, StoreEnum } from '@/types'
 
 const store = useStore()
 
-const getUser = computed(
-  () => store.getters[`${StoreEnum.ModuleNames.USER}/${userStoreEnum.Getters.GET_USER}`]
-)
+const detail = computed(
+  () =>
+    store.getters[
+      `${StoreEnum.ModuleNames.USER}/${userStoreEnum.Getters.GET_USER}`
+    ]
+);
 
-console.log(getUser.value);
+const getUsers = computed(() => detail.value.data);
 
-const name = computed((): string => getUser.value?.name)
-const username = computed((): string => getUser.value?.username)
+// console.log('getters: ', getUsers)
 </script>
 
 <template>
   <div class="relative overflow-x-auto">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table class="w-full text-sm text-left text-gray-500 mt-4">
+      <thead class="text-xs text-gray-900 uppercase bg-gray-50">
         <tr>
-          <th scope="col" class="px-6 py-3">No.</th>
+          <th scope="col" class="px-6 py-3">ID</th>
           <th scope="col" class="px-6 py-3">Name</th>
           <th scope="col" class="px-6 py-3">Username</th>
+          <th scope="col" class="px-6 py-3">Email</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <td class="px-6 py-4">1.</td>
-          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-            {{ name }}
+        <tr class="bg-white border-b border-gray-200" v-for="user in getUsers" :key="user.id">
+          <td class="px-6 py-4">
+            {{ user.id }}
+          </td>
+          <th
+            scope="row"
+            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+          >
+            {{ user.name }}
           </th>
-          <td class="px-6 py-4">{{ username }}</td>
+          <td class="px-6 py-4">
+            {{ user.username }}
+          </td>
+          <td class="px-6 py-4">
+            {{ user.email }}
+          </td>
         </tr>
       </tbody>
     </table>
